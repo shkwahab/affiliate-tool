@@ -5,7 +5,7 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "./ui/tooltip"
+} from "~/components/ui/tooltip"
 import ToolTipIcon from "~/components/icons/ToolTip"
 import BarChart from '~/components/BarChart'
 import { useMutation, useQuery } from '@tanstack/react-query'
