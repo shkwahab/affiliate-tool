@@ -17,6 +17,6 @@ export default defineConfig({
     port:3001
   },
   build: {
-    sourcemap: true,  
+    sourcemap: false,  
   },
 });
