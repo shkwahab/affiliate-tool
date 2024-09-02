@@ -43,8 +43,13 @@ export class AppService {
   async getAffiliate() {
     try {
       const affiliates = await this.firestore.collection('affiliates').get();
-      const data = affiliates.docs.map(doc => doc.data());
-      return data[0]
+      const data = affiliates.docs.map(doc => {
+        const id = doc.id;
+        const affiliateData = doc.data();
+        return { id, ...affiliateData };
+      });
+      
+      return data[0];
     } catch (error) {
       throw new BadRequestException(error);
     }
