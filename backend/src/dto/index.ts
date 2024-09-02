@@ -39,3 +39,24 @@ export class CreateAffiliateDto {
     existingProjectPerMonth: number;
 }
 
+export class EstimateRevenueDto {
+    @ApiProperty()
+    affiliate: AffiliateDto;
+    @ApiProperty()
+    pricePerProject: number;
+    @ApiProperty()
+    affiliatePayout: number;
+    @ApiProperty()
+    monthlyFee: number;
+}
+
+
+
+export class EstimateRevenueResponse {
+    @ApiProperty()
+    label: string
+    @ApiProperty()
+    revenue: number
+    @ApiProperty()
+    referralPayout: number
+}

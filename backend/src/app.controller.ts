@@ -2,7 +2,7 @@ import { Body, Controller, Get, Param, Post, Put, Query, UseGuards, ValidationPi
 import { AppService } from './app.service';
 import { ApiKeyAuthGuard } from './auth.guard';
 import { ApiTags, ApiOperation, ApiResponse, ApiBody, ApiParam, ApiHeader, ApiQuery } from '@nestjs/swagger';
-import { AffiliateDto, CreateAffiliateDto } from './dto';
+import { AffiliateDto, CreateAffiliateDto, EstimateRevenueDto, EstimateRevenueResponse } from './dto';
 
 @Controller()
 export class AppController {
@@ -34,6 +34,18 @@ export class AppController {
   @Put('/affiliate')
   async createAffiliate(@Body(new ValidationPipe()) data: CreateAffiliateDto) {
     return this.appService.saveAffiliate(data);
+  }
+
+  @ApiTags('Affiliate')
+  @ApiOperation({ summary: 'Estimate Affiliate Renue' })
+  @ApiResponse({ status: 200, description: 'Estimate Revenue', type: [EstimateRevenueResponse] })
+  @ApiResponse({ status: 400, description: 'Bad Request' })
+  @ApiHeader({ name: "api-key", required: true })
+  @ApiBody({ type: EstimateRevenueDto })
+  @UseGuards(ApiKeyAuthGuard)
+  @Post('/affiliate/estimate-revenue')
+  async estimareRevenue(@Body(new ValidationPipe()) data: EstimateRevenueDto) {
+    return this.appService.estimateRevenue(data);
   }
 
 }
