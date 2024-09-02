@@ -1,41 +1,33 @@
-"use client"
-import { Bar, BarChart, CartesianGrid, LabelList, XAxis } from "recharts"
+"use client";
+import { Bar, BarChart, CartesianGrid, LabelList, Tooltip, XAxis } from "recharts";
 
-import {
-  Card,
-  CardContent,
-} from "./ui/card"
+import { Card, CardContent } from "./ui/card";
 import {
   ChartConfig,
   ChartContainer,
-  ChartTooltip,
   ChartTooltipContent,
-} from "./ui/chart"
-
-
-const chartData = [
-  { month: "January", desktop: 186 },
-  { month: "February", desktop: 305 },
-  { month: "March", desktop: 237 },
-  { month: "April", desktop: 73 },
-  { month: "May", desktop: 209 },
-  { month: "June", desktop: 214 },
-  { month: "July", desktop: 215 },
-  { month: "August", desktop: 216 },
-  { month: "September", desktop: 217 },
-  { month: "October", desktop: 218 },
-  { month: "November", desktop: 219 },
-  { month: "December", desktop: 220 },
-]
+} from "./ui/chart";
+import { useSelector } from "react-redux";
+import { RootState } from "~/redux/store";
+import { EstimateRevenueResponse } from "~/types";
 
 const chartConfig = {
   desktop: {
     label: "Revenue",
     color: "#afcc54",
   },
-} satisfies ChartConfig
+} satisfies ChartConfig;
 
- const Chart=()=> {
+const Chart = () => {
+  const estimateRevenue = useSelector((state: RootState) => state.estimateRevenue);
+
+  const chartData = estimateRevenue.map((data, index) => ({
+    month: data.label,
+    revenue: data.revenue,
+    affiliatePayout: data.referralPayout,
+    color: index === estimateRevenue.length - 1 ? "#afcc54" : "#afcc54",
+  }));
+
   return (
     <Card>
       <CardContent>
@@ -54,24 +46,27 @@ const chartConfig = {
               axisLine={false}
               tickFormatter={(value) => value.slice(0, 3)}
             />
-            <ChartTooltip
+            <Tooltip
+              content={<ChartTooltipContent />}
               cursor={false}
-              content={<ChartTooltipContent  />}
             />
-            <Bar dataKey="desktop" fill={"#afcc54"} radius={0}>
+            <Bar
+              dataKey="revenue"
+              name={"Revenue"}
+              fill={"#afcc54"}
+            >
               <LabelList
                 position="top"
                 offset={12}
-                className="fill-foreground"
                 fontSize={12}
               />
             </Bar>
+
           </BarChart>
         </ChartContainer>
       </CardContent>
- 
     </Card>
-  )
-}
+  );
+};
 
-export default Chart
+export default Chart;
