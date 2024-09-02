@@ -1,13 +1,13 @@
 import React from 'react'
-import { Slider } from './ui/slider'
+import { Slider } from '~/components/ui/slider'
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "./ui/tooltip"
-import ToolTipIcon from "./icons/ToolTip"
-import BarChart from './BarChart'
+import ToolTipIcon from "~/components/icons/ToolTip"
+import BarChart from '~/components/BarChart'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { estimateRevenue, getAffiliate, saveAffiliate } from '~/apis'
 import { AffiliateDto } from '~/types'

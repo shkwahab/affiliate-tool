@@ -1,15 +1,14 @@
 "use client";
 import { Bar, BarChart, CartesianGrid, LabelList, Tooltip, XAxis } from "recharts";
 
-import { Card, CardContent } from "./ui/card";
+import { Card, CardContent } from "~/components/ui/card";
 import {
   ChartConfig,
   ChartContainer,
   ChartTooltipContent,
-} from "./ui/chart";
+} from "~/components/ui/chart";
 import { useSelector } from "react-redux";
 import { RootState } from "~/redux/store";
-import { EstimateRevenueResponse } from "~/types";
 
 const chartConfig = {
   desktop: {
