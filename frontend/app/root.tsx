@@ -5,12 +5,13 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-import "./tailwind.css";
+import "~/tailwind.css";
 import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query'
-import { PersistGate } from 'redux-persist/integration/react'
+import { PersistGate } from 'redux-persist/lib/integration/react'; 
+
 import { Provider } from "react-redux"
 import store, { persistor } from "~/redux/store"
 
