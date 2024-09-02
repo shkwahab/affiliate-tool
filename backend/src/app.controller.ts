@@ -38,7 +38,7 @@ export class AppController {
 
   @ApiTags('Affiliate')
   @ApiOperation({ summary: 'Estimate Affiliate Renue' })
-  @ApiResponse({ status: 200, description: 'Estimate Revenue', type: [EstimateRevenueResponse] })
+  @ApiResponse({ status: 201, description: 'Estimate Revenue', type: [EstimateRevenueResponse] })
   @ApiResponse({ status: 400, description: 'Bad Request' })
   @ApiHeader({ name: "api-key", required: true })
   @ApiBody({ type: EstimateRevenueDto })
