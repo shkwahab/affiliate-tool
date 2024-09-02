@@ -72,14 +72,11 @@ jobs:
             cat << 'EOF' > credentials.json
             ${{ secrets.FIREBASE_CREDENTIALS }}
             EOF
+            mv backend/* ../
+            rm -rf backend frontend
             pnpm i && pnpm build 
             cd ..
             sudo mv ~/sunvoy-backend /usr/share/apis/sunvoy-backend
-            cd /usr/share/apis/sunvoy-backend
-            cd backend
-            sudo mv* ../
-            cd ..
-            sudo rm -rf frontend backend
             pm2 delete sunvoy-backend || true
             pm2 start ecosystem.config.js --name sunvoy-backend
             echo "Deployment finished."
