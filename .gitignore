@@ -9,3 +9,5 @@ frontend/.env
 /backend/node_modules
 /backend/dist
 /backend/pnpm-lock.yaml
+/frontend/pnpm-lock.yaml
+
