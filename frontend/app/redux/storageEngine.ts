@@ -1,5 +1,3 @@
-"use client";
-
 import storage from 'redux-persist/lib/storage';
 
 const createNoopStorage = () => {

@@ -73,8 +73,7 @@ jobs:
             ${{ secrets.FIREBASE_CREDENTIALS }}
             EOF
             mv backend/* ./
-            rm -rf backend
-            mv frontend/ ../
+            rm -rf backend frontend
             pnpm i && pnpm build 
             cd ..
             sudo mv ~/sunvoy-backend /usr/share/apis/sunvoy-backend
