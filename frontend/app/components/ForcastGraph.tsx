@@ -11,13 +11,11 @@ import BarChart from './BarChart'
 
 const ForcastGraph = () => {
   const [totalReferMonthly, setReferTotalMonthly] = React.useState<number>(0)
-  const [avgNewProject, setAvgNewProjectMonthly] = React.useState<number>(0)
+  const [avgNewProject, setAvgNewProjectMonthly] = React.useState<number>(5)
   const [avgExistingProjects, setAverageExistingProjects] = React.useState<number>(0)
   const [totalIncome, setTotalIncomePerMonth] = React.useState<number>(3712.50)
 
-  const handleChangeReferTotal = (value: number[]) => {
-    setReferTotalMonthly(value[0])
-  }
+
   const handleChangeReferProject = (value: number[]) => {
     setAvgNewProjectMonthly(value[0])
   }
@@ -52,7 +50,7 @@ const ForcastGraph = () => {
                   </div>
 
                 </div>
-                <Slider onValueChange={handleChangeReferTotal} defaultValue={[totalReferMonthly]} max={100} step={1} />
+                <Slider  defaultValue={[totalReferMonthly]} max={totalReferMonthly} min={5} step={1} />
               </div>
               <div className='flex flex-col space-y-3'>
                 <div className=' text-gray-500  tracking-wide font-medium    flex justify-between items-center'>
@@ -67,7 +65,7 @@ const ForcastGraph = () => {
                             <ToolTipIcon width={15} height={15} fill={"#000"} />
                           </TooltipTrigger>
                           <TooltipContent>
-                            <p>Average New Project Per Month</p>
+                            <p>A number between 5 and 50</p>
                           </TooltipContent>
                         </Tooltip>
                       </TooltipProvider>
@@ -78,7 +76,7 @@ const ForcastGraph = () => {
                   </div>
 
                 </div>
-                <Slider onValueChange={handleChangeReferProject} defaultValue={[avgNewProject]} max={100} step={1} />
+                <Slider onValueChange={handleChangeReferProject} defaultValue={[avgNewProject]} max={50} step={1} />
               </div>
               <div className='flex flex-col space-y-3'>
                 <div className=' text-gray-500  tracking-wide font-medium    flex justify-between items-center'>
@@ -93,7 +91,7 @@ const ForcastGraph = () => {
                             <ToolTipIcon width={15} height={15} fill={"#000"} />
                           </TooltipTrigger>
                           <TooltipContent>
-                            <p>Average existing projects</p>
+                            <p>A number between 0 and 10,000</p>
                           </TooltipContent>
                         </Tooltip>
                       </TooltipProvider>
@@ -103,7 +101,7 @@ const ForcastGraph = () => {
                     {avgExistingProjects}
                   </div>
                 </div>
-                <Slider onValueChange={handleChangeExistingProjects} defaultValue={[avgExistingProjects]} max={100} step={1} />
+                <Slider onValueChange={handleChangeExistingProjects} defaultValue={[avgExistingProjects]} max={10000} min={0} step={1} />
               </div>
             </div>
             <div className='flex flex-col my-10 space-y-4'>
