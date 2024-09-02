@@ -10,6 +10,9 @@ import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query'
+import { PersistGate } from 'redux-persist/integration/react'
+import { Provider } from "react-redux"
+import store, { persistor } from "./redux/store"
 
 export const queryClient = new QueryClient({})
 
@@ -23,9 +26,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body className=" font-sans">
-        <QueryClientProvider client={queryClient}>
-          {children}
-        </QueryClientProvider>
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            <QueryClientProvider client={queryClient}>
+              {children}
+            </QueryClientProvider>
+          </PersistGate>
+        </Provider>
         <ScrollRestoration />
         <Scripts />
       </body>
