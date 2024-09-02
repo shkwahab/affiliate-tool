@@ -2,13 +2,16 @@ import { AffiliateDto, CreateAffiliateDto, EstimateRevenueDto, EstimateRevenueRe
 import { baseApi } from "./apiHelper";
 
 export const getAffiliate = async () => {
-    return await baseApi.get("/affiliate") as AffiliateDto;
+    const res = await baseApi.get("/affiliate");
+    return res.data as AffiliateDto;
 }
 
 export const saveAffiliate = async (data: CreateAffiliateDto) => {
-    return await baseApi.put("/affiliate", data) as AffiliateDto;
+    const res = await baseApi.put("/affiliate", data);
+    return res.data as AffiliateDto;
 }
 
 export const estimateRevenue = async (data: EstimateRevenueDto) => {
-    return await baseApi.post("/affiliate/estimate-revenue", data) as EstimateRevenueResponse[];
+    const res= await baseApi.post("/affiliate/estimate-revenue", data) 
+    return res.data as EstimateRevenueResponse[];
 }

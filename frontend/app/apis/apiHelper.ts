@@ -10,10 +10,7 @@ export const baseApi = axios.create({
 // Request interceptor to include token
 baseApi.interceptors.request.use(
     (config) => {
-        const token = localStorage.getItem("token");
-        if (token) {
-            config.headers["api-key"] = API_KEY;
-        }
+        config.headers["api-key"] = API_KEY;
         return config;
     },
     (error) => Promise.reject(error)

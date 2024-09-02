@@ -8,15 +8,32 @@ import {
 } from "./ui/tooltip"
 import ToolTipIcon from "./icons/ToolTip"
 import BarChart from './BarChart'
+import { useQuery } from '@tanstack/react-query'
+import { getAffiliate } from '~/apis'
 
 const ForcastGraph = () => {
   const [totalReferMonthly, setReferTotalMonthly] = React.useState<number>(1)
   const [avgNewProject, setAvgNewProjectMonthly] = React.useState<number>(5)
   const [avgExistingProjects, setAverageExistingProjects] = React.useState<number>(0)
-  const [totalIncome, setTotalIncomePerMonth] = React.useState<number>(3712.50)
+  const [totalIncome, setTotalIncomePerMonth] = React.useState<number>(1)
 
-  // Formulas
 
+  const { data: affiliate, isPending:isAffiliatePending, isSuccess: isAffilate } = useQuery({
+    queryKey: ["affiliate"],
+    queryFn: getAffiliate
+  })
+
+  
+
+  React.useEffect(() => {
+    if (isAffilate) {
+      console.log(affiliate)
+      setReferTotalMonthly(affiliate.monthlyRefferals)
+      setAvgNewProjectMonthly(affiliate.averageNewProjectPerMonth)
+      setAverageExistingProjects(affiliate.existingProjectPerMonth)
+    }
+    
+  }, [affiliate])
   const handleChangeReferTotal = (value: number[]) => {
     setReferTotalMonthly(value[0])
   }
@@ -33,6 +50,7 @@ const ForcastGraph = () => {
           <br />
           Passive Income</h2>
         <div className="flex flex-col md:flex-row space-y-5  md:space-x-10  ">
+          {isAffiliatePending? <div className='text-center'>Loading...</div>:
           <div className='px-10 md:px-0 my-4 md:my-0 md:w-1/4'>
             <div className="flex flex-col space-y-4">
               <div>
@@ -54,7 +72,7 @@ const ForcastGraph = () => {
                   </div>
 
                 </div>
-                <Slider onValueChange={handleChangeReferTotal} defaultValue={[totalReferMonthly]} max={10} min={1} step={1} />
+                <Slider onValueChange={handleChangeReferTotal} value={[totalReferMonthly]}  max={10} min={1} step={1} />
               </div>
               <div className='flex flex-col space-y-3'>
                 <div className=' text-gray-500  tracking-wide font-medium    flex justify-between items-center'>
@@ -80,7 +98,7 @@ const ForcastGraph = () => {
                   </div>
 
                 </div>
-                <Slider onValueChange={handleChangeReferProject} defaultValue={[avgNewProject]} max={50} step={1} />
+                <Slider onValueChange={handleChangeReferProject} value={[avgNewProject]} max={50} min={5} step={1} />
               </div>
               <div className='flex flex-col space-y-3'>
                 <div className=' text-gray-500  tracking-wide font-medium    flex justify-between items-center'>
@@ -105,7 +123,7 @@ const ForcastGraph = () => {
                     {avgExistingProjects}
                   </div>
                 </div>
-                <Slider onValueChange={handleChangeExistingProjects} defaultValue={[avgExistingProjects]} max={10000} min={0} step={1} />
+                <Slider onValueChange={handleChangeExistingProjects} value={[avgExistingProjects]} max={10000} min={0} step={1} />
               </div>
             </div>
             <div className='flex flex-col my-10 space-y-4'>
@@ -124,13 +142,14 @@ const ForcastGraph = () => {
               </div>
             </div>
           </div>
+          }
           <div className='md:w-3/4 '>
             <BarChart />
           </div>
         </div>
-          <div className=' text-gray-500 text-center my-8 md:w-8/12 md:mx-auto'>
-            Calculations are based on the number of customers you refer each month and their avg, project, volume. Factor in our churn rate and this brings you to your monthly estimated total passive futture income.
-          </div>
+        <div className=' text-gray-500 text-center my-8 md:w-8/12 md:mx-auto'>
+          Calculations are based on the number of customers you refer each month and their avg, project, volume. Factor in our churn rate and this brings you to your monthly estimated total passive futture income.
+        </div>
       </div>
     </React.Fragment>
   )
