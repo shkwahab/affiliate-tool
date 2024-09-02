@@ -12,6 +12,6 @@ export const saveAffiliate = async (data: CreateAffiliateDto) => {
 }
 
 export const estimateRevenue = async (data: EstimateRevenueDto) => {
-    const res= await baseApi.post("/affiliate/estimate-revenue", data) 
+    const res = await baseApi.post("/affiliate/estimate-revenue", data)
     return res.data as EstimateRevenueResponse[];
 }
