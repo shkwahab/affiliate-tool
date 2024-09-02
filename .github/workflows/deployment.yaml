@@ -1,0 +1,81 @@
+name: Deployment
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Cache pnpm
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Compress Project Files
+        run: |
+          tar -czf app.tar.gz *
+
+      - name: Clear previous build on server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
+          script: |
+            mkdir ~/sunvoy-backend
+            sudo rm -rf /usr/share/apis/sunvoy-backend    
+
+      - name: Copy Project Files to Server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
+          source: "app.tar.gz"
+          target: ~/sunvoy-backend
+
+      - name: Extract Project Files on Server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
+          script: |
+            cd ~/sunvoy-backend
+            tar -xzf app.tar.gz
+            rm app.tar.gz
+            cat << 'EOF' > .env
+            ${{ secrets.BACKEND_ENVIRONMENT }}
+            EOF
+            cat << 'EOF' > ecosystem.config.js
+            ${{ secrets.ECOSYSTEM }}
+            EOF
+            ${{ secrets.BACKEND_ENVIRONMENT }}
+            EOF
+            cat << 'EOF' > credentials.json
+            ${{ secrets.FIREBASE_CREDENTIALS }}
+            EOF
+            pnpm i && pnpm build 
+            cd ..
+            sudo mv ~/sunvoy-backend /usr/share/apis/sunvoy-backend
+            cd /usr/share/apis/sunvoy-backend
+            pm2 delete sunvoy-backend || true
+            pm2 start ecosystem.config.js --name sunvoy-backend
+            echo "Deployment finished."

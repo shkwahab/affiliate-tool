@@ -12,7 +12,7 @@ async function bootstrap() {
   }
   const app = await NestFactory.create(AppModule);
   // Set up allowed origins for CORS
-  const allowedOrigins = ['http://localhost:3000',"http://localhost:3001"];
+  const allowedOrigins = ['http://localhost:6000',"http://localhost:3001"];
   app.enableCors({
     origin: (origin, callback) => {
       if (allowedOrigins.includes(origin) || !origin) {
@@ -33,7 +33,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api-docs', app, document);
 
-  await app.listen(3000);
+  await app.listen(6000);
 }
 
 bootstrap();
