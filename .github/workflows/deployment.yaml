@@ -78,5 +78,5 @@ jobs:
             cd ..
             sudo mv ~/sunvoy-backend /usr/share/apis/sunvoy-backend
             pm2 delete sunvoy-backend || true
-            pm2 start ecosystem.config.js --name sunvoy-backend
+            pm2 start ecosystem.config.js
             echo "Deployment finished."
