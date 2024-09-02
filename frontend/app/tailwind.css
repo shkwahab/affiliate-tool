@@ -2,3 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
+
+.recharts-bar-rectangle:last-of-type path {
+    fill: #afcc54; 
+}

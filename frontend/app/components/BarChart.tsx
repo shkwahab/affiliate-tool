@@ -51,9 +51,11 @@ const Chart = () => {
               cursor={false}
             />
             <Bar
+              activeBar={{ fill: "#afcc54" }}
               dataKey="revenue"
+              data={chartData}
               name={"Revenue"}
-              fill={"#afcc54"}
+              fill={"gray"}
             >
               <LabelList
                 position="top"
