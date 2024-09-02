@@ -1,7 +1,7 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from 'redux-persist';
 import estimateRevenueSlice from '~/redux/slice/revenue-graph-slice';
-import storageEngine from "~/redux/storageEngine";
+import storage from "~/redux/storageEngine";
 
 const rootReducer = combineReducers({
     estimateRevenue: estimateRevenueSlice,
@@ -9,7 +9,7 @@ const rootReducer = combineReducers({
 
 const persistConfig = {
     key: 'root',
-    storage:storageEngine, 
+    storage, 
     whitelist: ['estimateRevenue'] 
 };
 
