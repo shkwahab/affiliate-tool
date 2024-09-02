@@ -26,12 +26,12 @@ const ForcastGraph = () => {
   }
   return (
     <React.Fragment>
-      <div className="p-10  flex flex-col space-y-4 ">
-        <h2 className='text-center text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold font-[Arial]'> Calculate Your Recurring
+      <div className="p-2 md:p-10  flex flex-col space-y-4 ">
+        <h2 className='text-center my-4 md:my-0 text-2xl lg:text-3xl font-semibold font-[Arial]'> Calculate Your Recurring
           <br />
           Passive Income</h2>
         <div className="flex flex-col md:flex-row space-y-5  md:space-x-10  ">
-          <div className='w-1/4'>
+          <div className='px-10 md:px-0 my-4 md:my-0 md:w-1/4'>
             <div className="flex flex-col space-y-4">
               <div>
                 <p>
@@ -107,7 +107,7 @@ const ForcastGraph = () => {
               </div>
             </div>
             <div className='flex flex-col my-10 space-y-4'>
-              <div className='flex space-x-2 items-center'>
+              <div className='flex flex-col   md:flex-row  space-x-2 items-center'>
                 <div >
                   Your
                   <span className='mx-1 font-bold'>
@@ -117,12 +117,12 @@ const ForcastGraph = () => {
                 </div>
 
               </div>
-              <div className='flex text-2xl sm:text-3xl md:text-5xl -ml-10 text-gray-800 font-bold justify-center'>
+              <div className='flex text-3xl md:text-5xl md:-ml-10 text-gray-800 font-bold justify-center'>
                 ${totalIncome.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}
               </div>
             </div>
           </div>
-          <div className='w-3/4'>
+          <div className='md:w-3/4 '>
             <BarChart />
           </div>
         </div>
