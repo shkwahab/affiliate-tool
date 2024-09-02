@@ -3,6 +3,7 @@ frontend/.env
 
 # Ignore backend environment files
 /backend/.env
+/backend/credentials.json # Firebase credentials file
 
 # Ignore the "node_modules" directory in both frontend and backend
 /frontend/node_modules
@@ -10,4 +11,5 @@ frontend/.env
 /backend/dist
 /backend/pnpm-lock.yaml
 /frontend/pnpm-lock.yaml
+
 
