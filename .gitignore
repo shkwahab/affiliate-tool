@@ -2,8 +2,8 @@
 frontend/.env
 
 # Ignore backend environment files
-/backend/.env
-/backend/credentials.json # Firebase credentials file
+backend/.env
+backend/credentials.json
 
 # Ignore the "node_modules" directory in both frontend and backend
 /frontend/node_modules
