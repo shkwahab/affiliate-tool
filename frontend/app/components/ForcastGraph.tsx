@@ -15,7 +15,9 @@ const ForcastGraph = () => {
   const [avgExistingProjects, setAverageExistingProjects] = React.useState<number>(0)
   const [totalIncome, setTotalIncomePerMonth] = React.useState<number>(3712.50)
 
-
+  const handleChangeReferTotal = (value: number[]) => {
+    setReferTotalMonthly(value[0])
+  }
   const handleChangeReferProject = (value: number[]) => {
     setAvgNewProjectMonthly(value[0])
   }
@@ -50,7 +52,7 @@ const ForcastGraph = () => {
                   </div>
 
                 </div>
-                <Slider  defaultValue={[totalReferMonthly]} max={totalReferMonthly} min={5} step={1} />
+                <Slider onValueChange={handleChangeReferTotal} defaultValue={[totalReferMonthly]} max={1000} min={0} step={1} />
               </div>
               <div className='flex flex-col space-y-3'>
                 <div className=' text-gray-500  tracking-wide font-medium    flex justify-between items-center'>
