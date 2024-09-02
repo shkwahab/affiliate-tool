@@ -12,7 +12,7 @@ async function bootstrap() {
   }
   const app = await NestFactory.create(AppModule);
   // Set up allowed origins for CORS
-  const allowedOrigins = ['http://localhost:6000',"http://localhost:3001","https://sunvoy-affiliate.mooo.com"];
+  const allowedOrigins = ['http://localhost:6000',"http://localhost:3001","https://sunvoy-affiliate.mooo.com","https://sunvoy-affiliate.vercel.app"];
   app.enableCors({
     origin: (origin, callback) => {
       if (allowedOrigins.includes(origin) || !origin) {
