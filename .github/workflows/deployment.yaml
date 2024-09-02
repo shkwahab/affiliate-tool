@@ -72,7 +72,7 @@ jobs:
             cat << 'EOF' > credentials.json
             ${{ secrets.FIREBASE_CREDENTIALS }}
             EOF
-            mv backend/* ../
+            mv backend/* ./
             rm -rf backend frontend
             pnpm i && pnpm build 
             cd ..
