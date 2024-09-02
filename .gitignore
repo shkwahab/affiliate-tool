@@ -8,4 +8,4 @@ frontend/.env
 /frontend/node_modules
 /backend/node_modules
 /backend/dist
-
+/backend/pnpm-lock.yaml
