@@ -56,7 +56,7 @@ const chartConfig = {
             />
             <ChartTooltip
               cursor={false}
-              content={<ChartTooltipContent hideLabel />}
+              content={<ChartTooltipContent  />}
             />
             <Bar dataKey="desktop" fill={"#afcc54"} radius={0}>
               <LabelList

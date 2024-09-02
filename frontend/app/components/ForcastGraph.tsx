@@ -10,10 +10,12 @@ import ToolTipIcon from "./icons/ToolTip"
 import BarChart from './BarChart'
 
 const ForcastGraph = () => {
-  const [totalReferMonthly, setReferTotalMonthly] = React.useState<number>(0)
+  const [totalReferMonthly, setReferTotalMonthly] = React.useState<number>(1)
   const [avgNewProject, setAvgNewProjectMonthly] = React.useState<number>(5)
   const [avgExistingProjects, setAverageExistingProjects] = React.useState<number>(0)
   const [totalIncome, setTotalIncomePerMonth] = React.useState<number>(3712.50)
+
+  // Formulas
 
   const handleChangeReferTotal = (value: number[]) => {
     setReferTotalMonthly(value[0])
@@ -52,7 +54,7 @@ const ForcastGraph = () => {
                   </div>
 
                 </div>
-                <Slider onValueChange={handleChangeReferTotal} defaultValue={[totalReferMonthly]} max={1000} min={0} step={1} />
+                <Slider onValueChange={handleChangeReferTotal} defaultValue={[totalReferMonthly]} max={10} min={1} step={1} />
               </div>
               <div className='flex flex-col space-y-3'>
                 <div className=' text-gray-500  tracking-wide font-medium    flex justify-between items-center'>
@@ -126,6 +128,9 @@ const ForcastGraph = () => {
             <BarChart />
           </div>
         </div>
+          <div className=' text-gray-500 text-center my-8 md:w-8/12 md:mx-auto'>
+            Calculations are based on the number of customers you refer each month and their avg, project, volume. Factor in our churn rate and this brings you to your monthly estimated total passive futture income.
+          </div>
       </div>
     </React.Fragment>
   )
